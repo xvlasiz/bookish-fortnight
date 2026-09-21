@@ -86,7 +86,16 @@ nav.sections button.active {
 }
 
 .about-content {
+  width: min(100%, 1100px);
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.2fr);
+  align-items: start;
+  gap: 80px;
   text-align: center;
+}
+
+.about-details {
+  padding-top: 20px;
 }
 
 .profile-picture {
@@ -179,8 +188,9 @@ nav.sections button.active {
 }
 
 .contact-section {
-  width: min(100%, 620px);
-  margin: 64px auto 0;
+  width: 100%;
+  margin: 0;
+  padding-top: 20px;
 }
 
 .contact-section h3 {
@@ -235,6 +245,17 @@ nav.sections button.active {
 .contact-section button:hover {
   background: #fff;
   color: #000;
+}
+
+@media (max-width: 760px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .contact-section {
+    padding-top: 0;
+  }
 }
 
 /* ── CAROUSEL ── */
