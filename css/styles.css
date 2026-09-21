@@ -91,8 +91,8 @@ nav.sections button.active {
 
 .profile-picture {
   display: block;
-  width: 220px;
-  height: 280px;
+  width: 320px;
+  height: 220px;
   margin: 0 auto 28px;
   border-radius: 0;
   object-fit: cover;
