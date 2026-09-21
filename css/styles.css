@@ -89,6 +89,16 @@ nav.sections button.active {
   text-align: center;
 }
 
+.profile-picture {
+  display: block;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 28px;
+  border: 2px solid rgba(255,255,255,0.8);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .about-content p {
   margin: 0 auto;
 }
