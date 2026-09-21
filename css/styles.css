@@ -128,9 +128,14 @@ nav.sections button.active {
   transform: translateY(-4px);
 }
 
-.social-links svg {
+.social-links svg,
+.social-links img {
   width: 42px;
   height: 42px;
+  object-fit: contain;
+}
+
+.social-links svg {
   fill: none;
   stroke: currentColor;
   stroke-width: 1.7;
