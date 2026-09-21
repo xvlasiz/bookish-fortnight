@@ -143,6 +143,11 @@ nav.sections button.active {
   stroke-linejoin: round;
 }
 
+.social-links img {
+  width: 58px;
+  height: 58px;
+}
+
 .tools-heading {
   margin-top: 58px;
   font-size: 22px;
