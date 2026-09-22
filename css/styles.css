@@ -43,8 +43,8 @@ body::before {
     radial-gradient(circle at 50% 50%, #090a0b 0%, #000000 84%, #030405 100%);
   background-size: 155% 155%, 145% 145%, 165% 165%, 150% 150%, 135% 135%;
   filter: blur(44px) saturate(115%);
-  animation: gradient-drift 20s ease-in-out infinite alternate,
-             gradient-shift 28s ease-in-out infinite alternate;
+  animation: gradient-drift 13s ease-in-out infinite alternate,
+             gradient-shift 18s ease-in-out infinite alternate;
 }
 
 body::after {
