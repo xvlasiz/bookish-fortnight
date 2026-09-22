@@ -13,8 +13,6 @@ body {
   position: relative;
   min-height: 100vh;
   isolation: isolate;
-  --gradient-x: 0px;
-  --gradient-y: 0px;
   font-family: Georgia, 'Times New Roman', serif;
   background-color: #101823;
   color: #fff;
@@ -49,8 +47,8 @@ body::after {
 }
 
 @keyframes gradient-drift {
-  0% { transform: translate3d(var(--gradient-x), var(--gradient-y), 0) scale(1) rotate(0deg); }
-  100% { transform: translate3d(var(--gradient-x), var(--gradient-y), 0) scale(1.14) rotate(7deg); }
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.14) rotate(7deg); }
 }
 
 @keyframes gradient-shift {
