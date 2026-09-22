@@ -186,13 +186,29 @@ nav.sections button.active {
   display: none;
 }
 
-.sidebar nav.sections button.nav-bounce {
-  animation: nav-button-bounce .45s ease;
+.sidebar nav.sections button span {
+  display: inline-block;
 }
 
-@keyframes nav-button-bounce {
+.sidebar nav.sections button.nav-bounce span {
+  animation: nav-letter-bounce .45s ease;
+}
+
+.sidebar nav.sections button.nav-bounce span:nth-child(1) { animation-delay: 0s; }
+.sidebar nav.sections button.nav-bounce span:nth-child(2) { animation-delay: .06s; }
+.sidebar nav.sections button.nav-bounce span:nth-child(3) { animation-delay: .12s; }
+.sidebar nav.sections button.nav-bounce span:nth-child(4) { animation-delay: .18s; }
+.sidebar nav.sections button.nav-bounce span:nth-child(5) { animation-delay: .24s; }
+.sidebar nav.sections button.nav-bounce span:nth-child(6) { animation-delay: .30s; }
+.sidebar nav.sections button.nav-bounce span:nth-child(7) { animation-delay: .36s; }
+.sidebar nav.sections button.nav-bounce span:nth-child(8) { animation-delay: .42s; }
+.sidebar nav.sections button.nav-bounce span:nth-child(9) { animation-delay: .48s; }
+.sidebar nav.sections button.nav-bounce span:nth-child(10) { animation-delay: .54s; }
+.sidebar nav.sections button.nav-bounce span:nth-child(11) { animation-delay: .60s; }
+
+@keyframes nav-letter-bounce {
   0%, 100% { transform: translateY(0); }
-  45% { transform: translateY(-5px); }
+  45% { transform: translateY(-6px); }
   70% { transform: translateY(1px); }
 }
 
