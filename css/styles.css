@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
   isolation: isolate;
   font-family: Georgia, 'Times New Roman', serif;
-  background-color: #404040;
+  background-color: #08090a;
   color: #fff;
   overflow-x: hidden;
 }
@@ -25,7 +25,7 @@ body::before {
   inset: -25%;
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(circle at 50% 50%, #404040 0%, #000000 99%, #bedafe 100%);
+  background-image: radial-gradient(circle at 50% 50%, #17191b 0%, #000000 82%, #090a0c 100%);
   background-size: 135% 135%;
   filter: blur(18px);
   animation: gradient-drift 18s ease-in-out infinite alternate,
@@ -38,12 +38,13 @@ body::after {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-color: rgba(0, 0, 0, .08);
+  background-color: rgba(0, 0, 0, .16);
   background-image:
     url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.42'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
+  background-size: 220px 220px;
   mix-blend-mode: soft-light;
-  opacity: .70;
+  opacity: .62;
+  animation: noise-drift 12s steps(8) infinite;
 }
 
 @keyframes gradient-drift {
@@ -57,8 +58,17 @@ body::after {
   100% { background-position: 20% 100%; }
 }
 
+@keyframes noise-drift {
+  0% { transform: translate3d(0, 0, 0); background-position: 0 0; }
+  25% { transform: translate3d(-1.5%, 1%, 0); background-position: 40px -25px; }
+  50% { transform: translate3d(1%, -1.5%, 0); background-position: -30px 35px; }
+  75% { transform: translate3d(1.5%, 1%, 0); background-position: 25px 45px; }
+  100% { transform: translate3d(0, 0, 0); background-position: -20px -35px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   body::before,
+  body::after,
   .sidebar h1.logo-bounce span {
     animation: none;
   }
