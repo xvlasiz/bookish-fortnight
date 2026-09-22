@@ -2,8 +2,18 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 @font-face {
-  font-family: 'Drunk Fonts';
-  src: url('/DRUNKFONTS-Regular.otf') format('opentype');
+  font-family: 'Wagon Extra Light';
+  src: url('/fonts/Wagon-ExtraLight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Wagon Bold';
+  src: url('/fonts/Wagon-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -13,7 +23,7 @@ body {
   position: relative;
   min-height: 100vh;
   isolation: isolate;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Wagon Extra Light', Georgia, 'Times New Roman', serif;
   background-color: #08090a;
   color: #fff;
   overflow-x: hidden;
@@ -93,7 +103,7 @@ body::after {
   font-size: 38px;
   line-height: 1.2;
   font-weight: 700;
-  font-family: 'Drunk Fonts', Georgia, 'Times New Roman', serif;
+  font-family: 'Wagon Bold', Georgia, 'Times New Roman', serif;
   margin: 0 0 70px 0;
   cursor: pointer;
   transition: opacity .2s;
