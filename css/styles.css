@@ -155,6 +155,47 @@ nav.sections button.active {
   width: fit-content;
 }
 
+.sidebar-contact {
+  margin-top: auto;
+}
+
+.sidebar-contact p {
+  margin-bottom: 14px;
+  color: rgba(255,255,255,0.55);
+  font-size: 14px;
+}
+
+.sidebar-contact .social-links {
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 0;
+}
+
+.sidebar-contact .social-links a {
+  min-width: 42px;
+  font-size: 0;
+}
+
+.sidebar-contact .social-links svg {
+  width: 26px;
+  height: 26px;
+}
+
+.about-details > p,
+.about-details > .social-links {
+  display: none;
+}
+
+.sidebar nav.sections button.nav-bounce {
+  animation: nav-button-bounce .45s ease;
+}
+
+@keyframes nav-button-bounce {
+  0%, 100% { transform: translateY(0); }
+  45% { transform: translateY(-5px); }
+  70% { transform: translateY(1px); }
+}
+
 /* ── MAIN CONTENT ── */
 .main-content {
   margin-left: var(--sidebar-w);
