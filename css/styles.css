@@ -36,13 +36,13 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(64, 64, 64, .8), transparent 34%),
-    radial-gradient(circle at 80% 25%, rgba(34, 36, 38, .75), transparent 38%),
-    radial-gradient(circle at 65% 80%, rgba(54, 56, 58, .72), transparent 36%),
-    radial-gradient(circle at 18% 78%, rgba(23, 25, 27, .85), transparent 40%),
+    radial-gradient(ellipse 65% 48% at 20% 30%, rgba(110, 112, 115, .92) 0%, rgba(64, 64, 64, .52) 42%, transparent 76%),
+    radial-gradient(ellipse 60% 52% at 80% 25%, rgba(70, 74, 78, .9) 0%, rgba(34, 36, 38, .5) 45%, transparent 78%),
+    radial-gradient(ellipse 62% 50% at 65% 80%, rgba(94, 98, 102, .88) 0%, rgba(54, 56, 58, .48) 44%, transparent 78%),
+    radial-gradient(ellipse 55% 58% at 18% 78%, rgba(40, 43, 46, .9) 0%, rgba(23, 25, 27, .5) 45%, transparent 80%),
     radial-gradient(circle at 50% 50%, #17191b 0%, #000000 82%, #090a0c 100%);
   background-size: 155% 155%, 145% 145%, 165% 165%, 150% 150%, 135% 135%;
-  filter: blur(24px);
+  filter: blur(44px) saturate(115%);
   animation: gradient-drift 20s ease-in-out infinite alternate,
              gradient-shift 28s ease-in-out infinite alternate;
 }
@@ -56,9 +56,9 @@ body::after {
   background-color: rgba(0, 0, 0, .16);
   background-image:
     url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.42'/%3E%3C/svg%3E");
-  background-size: 220px 220px;
+  background-size: 260px 260px;
   mix-blend-mode: soft-light;
-  opacity: .62;
+  opacity: .42;
   animation: noise-drift 12s steps(8) infinite;
 }
 
