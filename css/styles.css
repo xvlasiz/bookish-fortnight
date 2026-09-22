@@ -432,6 +432,17 @@ nav.sections button.active {
   display: block;
 }
 
+.video-item figure {
+  width: 100%;
+}
+
+.video-item figcaption {
+  margin-top: 10px;
+  color: rgba(255,255,255,0.65);
+  font-size: 14px;
+  text-align: center;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) {
   :root { --sidebar-w: 0px; }
