@@ -194,23 +194,23 @@
       <div class="video-item">
         <figure>
           <video src="animations/sheet.mp4" autoplay loop muted playsinline></video>
-          <figcaption>Animation project 1</figcaption>
+          <figcaption>Avatar Assignment</figcaption>
         </figure>
         <figure>
           <video src="animations/sheet_1.mp4" autoplay loop muted playsinline></video>
-          <figcaption>Animation project 2</figcaption>
+          <figcaption>Avatar Assignment </figcaption>
         </figure>
         <figure>
           <video src="animations/sheets_2.mp4" autoplay loop muted playsinline></video>
-          <figcaption>Animation project 3</figcaption>
+          <figcaption>Pitch Assignment</figcaption>
         </figure>
         <figure>
           <video src="animations/sheet_3.mp4" autoplay loop muted playsinline></video>
-          <figcaption>Animation project 4</figcaption>
+          <figcaption>Pitch Assignment</figcaption>
         </figure>
         <figure>
           <video src="animations/sheet_4.mp4" autoplay loop muted playsinline></video>
-          <figcaption>Animation project 5</figcaption>
+          <figcaption>Pitch Assignment</figcaption>
         </figure>
       </div>
     </div>
@@ -389,6 +389,27 @@
     if (e.key === 'ArrowLeft')  goTo(currentIndex - 1);
     if (e.key === 'ArrowRight') goTo(currentIndex + 1);
   });
+
+  // Let the gradient gently follow the pointer, like a soft light source.
+  let gradientTargetX = 0;
+  let gradientTargetY = 0;
+  let gradientX = 0;
+  let gradientY = 0;
+
+  document.addEventListener('pointermove', (e) => {
+    gradientTargetX = (e.clientX / window.innerWidth - 0.5) * 70;
+    gradientTargetY = (e.clientY / window.innerHeight - 0.5) * 70;
+  });
+
+  function animateGradientPointer() {
+    gradientX += (gradientTargetX - gradientX) * 0.06;
+    gradientY += (gradientTargetY - gradientY) * 0.06;
+    document.body.style.setProperty('--gradient-x', `${gradientX.toFixed(2)}px`);
+    document.body.style.setProperty('--gradient-y', `${gradientY.toFixed(2)}px`);
+    requestAnimationFrame(animateGradientPointer);
+  }
+
+  animateGradientPointer();
 
   // ── Start on home ─────────────────────────────────────────────────────
   renderCarousel();
