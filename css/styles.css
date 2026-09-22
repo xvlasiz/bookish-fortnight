@@ -484,6 +484,15 @@ nav.sections button.active {
 }
 .gallery img:hover { opacity: 0.8; transform: scale(1.02); }
 
+#page-concept-art .gallery img {
+  filter: grayscale(1);
+  transition: filter .25s ease, opacity .2s ease, transform .2s ease;
+}
+
+#page-concept-art .gallery img:hover {
+  filter: grayscale(.3) saturate(1.25);
+}
+
 @media (max-width: 1000px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px)  { .gallery { grid-template-columns: 1fr; } }
 
