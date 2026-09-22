@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
   isolation: isolate;
   font-family: Georgia, 'Times New Roman', serif;
-  background-color: #101823;
+  background-color: #404040;
   color: #fff;
   overflow-x: hidden;
 }
@@ -25,7 +25,7 @@ body::before {
   inset: -25%;
   z-index: -1;
   pointer-events: none;
-  background-image: linear-gradient(45deg, #101823 0%, #768174 99%, #bedafe 100%);
+  background-image: radial-gradient(circle at 50% 50%, #404040 0%, #000000 99%, #bedafe 100%);
   background-size: 135% 135%;
   filter: blur(18px);
   animation: gradient-drift 18s ease-in-out infinite alternate,
