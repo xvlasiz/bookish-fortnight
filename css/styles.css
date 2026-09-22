@@ -16,7 +16,7 @@ body {
   --gradient-x: 0px;
   --gradient-y: 0px;
   font-family: Georgia, 'Times New Roman', serif;
-  background: #090712;
+  background-color: #101823;
   color: #fff;
   overflow-x: hidden;
 }
@@ -27,13 +27,9 @@ body::before {
   inset: -25%;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 18% 20%, rgba(255, 50, 180, .95), transparent 34%),
-    radial-gradient(circle at 82% 18%, rgba(78, 80, 255, .9), transparent 36%),
-    radial-gradient(circle at 72% 82%, rgba(0, 224, 194, .82), transparent 34%),
-    radial-gradient(circle at 22% 78%, rgba(255, 137, 38, .72), transparent 32%);
+  background-image: linear-gradient(45deg, #101823 0%, #768174 99%, #bedafe 100%);
   background-size: 135% 135%;
-  filter: blur(42px) saturate(145%);
+  filter: blur(18px);
   animation: gradient-drift 18s ease-in-out infinite alternate,
              gradient-shift 24s ease-in-out infinite alternate;
 }
