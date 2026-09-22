@@ -310,6 +310,15 @@ nav.sections button.active {
   stroke-linejoin: round;
 }
 
+.social-links svg.linkedin-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
+.social-links svg.linkedin-icon path {
+  fill: #000;
+}
+
 .tools-heading {
   margin-top: 58px;
   font-size: 22px;
