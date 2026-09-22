@@ -59,7 +59,7 @@ body::after {
 
 @media (prefers-reduced-motion: reduce) {
   body::before,
-  .sidebar h1.logo-bounce {
+  .sidebar h1.logo-bounce span {
     animation: none;
   }
 }
@@ -90,15 +90,28 @@ body::after {
 }
 .sidebar h1:hover { opacity: 0.7; }
 
-.sidebar h1.logo-bounce {
-  animation: logo-bounce .55s ease;
+.sidebar h1 span {
+  display: inline-block;
 }
 
-@keyframes logo-bounce {
-  0%, 100% { transform: translateY(0) scale(1); }
-  35% { transform: translateY(-8px) scale(1.04); }
-  65% { transform: translateY(2px) scale(.98); }
+.sidebar h1.logo-bounce span {
+  animation: logo-letter-bounce .45s ease;
 }
+
+.sidebar h1.logo-bounce span:nth-child(1) { animation-delay: 0s; }
+.sidebar h1.logo-bounce span:nth-child(2) { animation-delay: .06s; }
+.sidebar h1.logo-bounce span:nth-child(3) { animation-delay: .12s; }
+.sidebar h1.logo-bounce span:nth-child(4) { animation-delay: .18s; }
+.sidebar h1.logo-bounce span:nth-child(5) { animation-delay: .24s; }
+.sidebar h1.logo-bounce span:nth-child(6) { animation-delay: .30s; }
+.sidebar h1.logo-bounce span:nth-child(7) { animation-delay: .36s; }
+
+@keyframes logo-letter-bounce {
+  0%, 100% { transform: translateY(0); }
+  45% { transform: translateY(-6px); }
+  70% { transform: translateY(1px); }
+}
+
 
 nav.sections {
   display: flex;

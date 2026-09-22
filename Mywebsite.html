@@ -16,7 +16,9 @@
 
   <aside class="sidebar">
     <!-- Name = HOME (carousel page). No active class, it's its own thing. -->
-    <h1 id="homeName">Vlaacid</h1>
+    <h1 id="homeName" aria-label="Vlaacid">
+      <span>V</span><span>l</span><span>a</span><span>a</span><span>c</span><span>i</span><span>d</span>
+    </h1>
 
     <nav class="sections">
       <button data-section="concept-art">Concept art</button>
@@ -362,12 +364,9 @@
   homeName.addEventListener('click', () => {
     homeName.classList.remove('logo-bounce');
     requestAnimationFrame(() => homeName.classList.add('logo-bounce'));
+    window.setTimeout(() => homeName.classList.remove('logo-bounce'), 900);
     navButtons.forEach(b => b.classList.remove('active'));
     showPage('page-home');
-  });
-
-  homeName.addEventListener('animationend', () => {
-    homeName.classList.remove('logo-bounce');
   });
 
   // ── Nav button clicks = their own page ───────────────────────────────
