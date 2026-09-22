@@ -357,9 +357,17 @@
   }
 
   // ── Name click = HOME ─────────────────────────────────────────────────
-  document.getElementById('homeName').addEventListener('click', () => {
+  const homeName = document.getElementById('homeName');
+
+  homeName.addEventListener('click', () => {
+    homeName.classList.remove('logo-bounce');
+    requestAnimationFrame(() => homeName.classList.add('logo-bounce'));
     navButtons.forEach(b => b.classList.remove('active'));
     showPage('page-home');
+  });
+
+  homeName.addEventListener('animationend', () => {
+    homeName.classList.remove('logo-bounce');
   });
 
   // ── Nav button clicks = their own page ───────────────────────────────
