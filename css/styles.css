@@ -626,6 +626,21 @@ nav.sections button.active {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) and (pointer: coarse) {
+  body::before,
+  body::after {
+    animation: none;
+  }
+
+  body::before {
+    filter: none;
+    background-image: radial-gradient(circle at 50% 50%, #111315 0%, #000 88%);
+  }
+
+  body::after {
+    opacity: .22;
+    mix-blend-mode: normal;
+  }
+
   :root { --sidebar-w: 0px; }
   .sidebar {
     position: relative;
