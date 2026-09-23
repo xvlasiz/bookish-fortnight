@@ -636,6 +636,13 @@ nav.sections button.active {
   .sidebar h1 {
     margin-bottom: 18px;
     font-size: 34px;
+    text-align: center;
+  }
+  .sidebar {
+    align-items: center;
+  }
+  .menu-toggle {
+    align-self: center;
   }
   .menu-toggle {
     display: flex;
@@ -701,8 +708,12 @@ nav.sections button.active {
     gap: 18px;
   }
   .main-content { margin-left: 0; }
-  .page { padding: 28px 20px 48px; }
+  .page { padding: 12px 20px 48px; }
   .carousel { max-width: 100%; }
+  #page-home {
+    align-items: flex-start;
+    padding-top: 12px;
+  }
   .arrow { padding: 8px; }
   .arrow svg { width: 28px; height: 28px; }
   .arrow.prev { left: 2px; }
