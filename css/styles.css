@@ -160,6 +160,10 @@ nav.sections button.active {
   width: fit-content;
 }
 
+.menu-toggle {
+  display: none;
+}
+
 .sidebar-contact {
   margin-top: auto;
 }
@@ -630,31 +634,67 @@ nav.sections button.active {
     padding: 28px 20px 20px;
   }
   .sidebar h1 {
-    margin-bottom: 28px;
+    margin-bottom: 18px;
     font-size: 34px;
   }
-  nav.sections {
-    flex-direction: row;
+  .menu-toggle {
+    display: flex;
+    align-items: center;
     gap: 10px;
-    overflow-x: auto;
-    padding: 4px 0 12px;
-    scrollbar-width: none;
-  }
-  nav.sections::-webkit-scrollbar { display: none; }
-  nav.sections button {
-    flex: 0 0 auto;
-    padding: 9px 13px;
-    border: 1px solid rgba(255,255,255,0.28);
-    border-radius: 999px;
+    width: fit-content;
+    margin-bottom: 0;
+    padding: 8px 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
     font-size: 16px;
-    white-space: nowrap;
+    opacity: .8;
+  }
+  .menu-toggle[aria-expanded="true"] { opacity: 1; }
+  .menu-icon {
+    display: grid;
+    gap: 4px;
+    width: 22px;
+  }
+  .menu-icon i {
+    display: block;
+    height: 1px;
+    background: currentColor;
+    transition: transform .2s, opacity .2s;
+  }
+  .menu-toggle[aria-expanded="true"] .menu-icon i:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+  }
+  .menu-toggle[aria-expanded="true"] .menu-icon i:nth-child(2) { opacity: 0; }
+  .menu-toggle[aria-expanded="true"] .menu-icon i:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+  nav.sections {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 0 8px;
+  }
+  nav.sections.menu-open { display: flex; }
+  nav.sections button {
+    padding: 3px 0;
+    border: 0;
+    border-radius: 0;
+    font-size: 20px;
   }
   nav.sections button.active {
-    border: 1px solid #fff;
-    padding-bottom: 9px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 3px;
   }
   .sidebar-contact {
-    margin-top: 20px;
+    display: none;
+  }
+  .sidebar.menu-open .sidebar-contact {
+    display: block;
+    margin-top: 18px;
   }
   .sidebar-contact .social-links {
     gap: 18px;

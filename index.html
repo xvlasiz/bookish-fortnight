@@ -20,7 +20,12 @@
       <span>V</span><span>l</span><span>a</span><span>a</span><span>c</span><span>i</span><span>d</span>
     </h1>
 
-    <nav class="sections">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+      <span class="menu-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>Menu</span>
+    </button>
+
+    <nav class="sections" id="site-navigation">
       <button data-section="concept-art"><span>C</span><span>o</span><span>n</span><span>c</span><span>e</span><span>p</span><span>t</span> <span>a</span><span>r</span><span>t</span></button>
       <button data-section="photography"><span>P</span><span>h</span><span>o</span><span>t</span><span>o</span><span>g</span><span>r</span><span>a</span><span>p</span><span>h</span><span>y</span></button>
       <button data-section="animations"><span>A</span><span>n</span><span>i</span><span>m</span><span>a</span><span>t</span><span>i</span><span>o</span><span>n</span><span>s</span></button>
@@ -307,6 +312,9 @@
   const dotsEl    = document.getElementById('dots');
   const captionEl = document.getElementById('caption');
   const navButtons = document.querySelectorAll('nav.sections button');
+  const sidebar = document.querySelector('.sidebar');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const sections = document.querySelector('.sections');
 
   // ── Render carousel ───────────────────────────────────────────────────
   function renderCarousel() {
@@ -389,7 +397,17 @@
       navButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       showPage('page-' + btn.dataset.section);
+      menuToggle.setAttribute('aria-expanded', 'false');
+      sidebar.classList.remove('menu-open');
+      sections.classList.remove('menu-open');
     });
+  });
+
+  menuToggle.addEventListener('click', () => {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!isOpen));
+    sidebar.classList.toggle('menu-open', !isOpen);
+    sections.classList.toggle('menu-open', !isOpen);
   });
 
   // ── Arrows ───────────────────────────────────────────────────────────
