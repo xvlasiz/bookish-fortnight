@@ -625,7 +625,7 @@ nav.sections button.active {
 }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 900px) {
+@media (max-width: 600px) and (pointer: coarse) {
   :root { --sidebar-w: 0px; }
   .sidebar {
     position: relative;
