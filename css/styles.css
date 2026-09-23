@@ -444,6 +444,7 @@ nav.sections button.active {
   background: rgba(0, 0, 0, .22);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(10px);
+  touch-action: pan-y;
 }
 .track {
   display: flex;
@@ -622,10 +623,49 @@ nav.sections button.active {
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) {
   :root { --sidebar-w: 0px; }
-  .sidebar { position: relative; width: 100%; height: auto; padding: 40px 28px; }
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 28px 20px 20px;
+  }
+  .sidebar h1 {
+    margin-bottom: 28px;
+    font-size: 34px;
+  }
+  nav.sections {
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 4px 0 12px;
+    scrollbar-width: none;
+  }
+  nav.sections::-webkit-scrollbar { display: none; }
+  nav.sections button {
+    flex: 0 0 auto;
+    padding: 9px 13px;
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 999px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  nav.sections button.active {
+    border: 1px solid #fff;
+    padding-bottom: 9px;
+  }
+  .sidebar-contact {
+    margin-top: 20px;
+  }
+  .sidebar-contact .social-links {
+    gap: 18px;
+  }
   .main-content { margin-left: 0; }
-  .page { padding: 40px; }
-  .arrow.prev { left: 4px; }
-  .arrow.next { right: 4px; }
+  .page { padding: 28px 20px 48px; }
+  .carousel { max-width: 100%; }
+  .arrow { padding: 8px; }
+  .arrow svg { width: 28px; height: 28px; }
+  .arrow.prev { left: 2px; }
+  .arrow.next { right: 2px; }
+  .dots { margin-top: 18px; }
   .video-item { padding: 20px; }
 }
