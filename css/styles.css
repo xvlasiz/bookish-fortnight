@@ -303,8 +303,8 @@ nav.sections button.active {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px;
-  max-width: 560px;
-  margin: 28px auto 0;
+  width: 100%;
+  margin: 36px auto 0;
   text-align: left;
 }
 
