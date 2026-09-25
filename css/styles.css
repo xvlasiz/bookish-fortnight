@@ -291,8 +291,38 @@ nav.sections button.active {
   text-align: left;
 }
 
+.about-description p {
+  color: rgba(255,255,255,0.82);
+}
+
 .about-description p + p {
   margin-top: 14px;
+}
+
+.about-skills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  max-width: 560px;
+  margin: 28px auto 0;
+  text-align: left;
+}
+
+.about-skills h3 {
+  margin-bottom: 12px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.about-skills ul {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  color: rgba(255,255,255,0.82);
+  font-size: 16px;
+  line-height: 1.5;
+  list-style: none;
 }
 
 .social-links {
@@ -444,6 +474,10 @@ nav.sections button.active {
   .about-content {
     grid-template-columns: 1fr;
     gap: 48px;
+  }
+
+  .about-skills {
+    gap: 20px;
   }
 
   .contact-section {
