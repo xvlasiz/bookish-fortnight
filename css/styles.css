@@ -170,6 +170,13 @@ nav.sections button.active {
   left: 48px;
   z-index: 20;
   width: calc(var(--sidebar-w) - 96px);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.sidebar-contact.is-hidden {
+  transform: translateY(calc(100% + 24px));
+  opacity: 0;
+  pointer-events: none;
 }
 
 .sidebar-contact p {
@@ -828,6 +835,9 @@ nav.sections button.active {
     background: rgba(0,0,0,0.82);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+  }
+  .sidebar-contact.is-hidden {
+    transform: translateY(calc(100% + 24px));
   }
   .sidebar-contact p {
     margin-bottom: 8px;

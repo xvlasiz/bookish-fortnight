@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Uladzislau Ryzhevich - Portfolio</title>
-  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=social-footer-fixed">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=social-footer-scroll">
   <link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
   <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
 
@@ -347,6 +347,7 @@
   const sidebar = document.querySelector('.sidebar');
   const menuToggle = document.querySelector('.menu-toggle');
   const sections = document.querySelector('.sections');
+  const socialFooter = document.querySelector('.sidebar-contact');
 
   // ── Render carousel ───────────────────────────────────────────────────
   function renderCarousel() {
@@ -441,6 +442,22 @@
     sidebar.classList.toggle('menu-open', !isOpen);
     sections.classList.toggle('menu-open', !isOpen);
   });
+
+  let lastScrollY = window.scrollY;
+  let scrollUpdatePending = false;
+
+  window.addEventListener('scroll', () => {
+    if (scrollUpdatePending) return;
+    scrollUpdatePending = true;
+
+    requestAnimationFrame(() => {
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > lastScrollY && currentScrollY > 40;
+      socialFooter.classList.toggle('is-hidden', scrollingDown);
+      lastScrollY = currentScrollY;
+      scrollUpdatePending = false;
+    });
+  }, { passive: true });
 
   // ── Arrows ───────────────────────────────────────────────────────────
   document.querySelector('.arrow.prev').addEventListener('click', () => goTo(currentIndex - 1));
