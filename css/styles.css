@@ -278,6 +278,10 @@ nav.sections button.active {
   margin: 0 auto;
 }
 
+.about-content .about-bio {
+  color: #fff;
+}
+
 .social-links {
   display: flex;
   flex-wrap: wrap;
