@@ -285,6 +285,16 @@ nav.sections button.active {
   font-size: 18px;
 }
 
+.about-description {
+  max-width: 560px;
+  margin: 18px auto 0;
+  text-align: left;
+}
+
+.about-description p + p {
+  margin-top: 14px;
+}
+
 .social-links {
   display: flex;
   flex-wrap: wrap;
