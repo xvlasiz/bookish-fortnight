@@ -190,7 +190,6 @@ nav.sections button.active {
   height: 26px;
 }
 
-.about-details > p,
 .about-details > .social-links {
   display: none;
 }
