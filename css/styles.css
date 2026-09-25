@@ -278,7 +278,10 @@ nav.sections button.active {
 }
 
 .about-content .about-bio {
+  display: block;
+  margin: 0 auto;
   color: #fff;
+  font-weight: 700;
 }
 
 .social-links {
