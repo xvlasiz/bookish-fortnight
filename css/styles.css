@@ -286,19 +286,28 @@ nav.sections button.active {
 }
 
 .about-more {
-  margin-top: 14px;
+  margin-top: 28px;
   text-align: left;
 }
 
 .about-more summary {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   width: fit-content;
-  color: rgba(255,255,255,0.82);
+  padding: 9px 14px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 3px;
+  color: #fff;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 17px;
+  transition: background .2s ease, border-color .2s ease;
   list-style: none;
+}
+
+.about-more summary:hover {
+  border-color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.08);
 }
 
 .about-more summary::-webkit-details-marker {
