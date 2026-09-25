@@ -719,7 +719,7 @@ nav.sections button.active {
 }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 600px) and (pointer: coarse) {
+@media (max-width: 860px) and (pointer: coarse) {
   body::before,
   body::after {
     animation: none;
