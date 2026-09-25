@@ -277,11 +277,12 @@ nav.sections button.active {
   margin: 0 auto;
 }
 
-.about-content .about-bio {
-  display: block;
+#page-about .about-content .about-details .about-bio {
+  display: block !important;
   margin: 0 auto;
   color: #fff;
   font-weight: 700;
+  font-size: 18px;
 }
 
 .social-links {
