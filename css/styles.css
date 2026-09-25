@@ -768,17 +768,29 @@ nav.sections button.active {
     padding-bottom: 3px;
   }
   .sidebar-contact {
-    display: none;
-  }
-  .sidebar.menu-open .sidebar-contact {
     display: block;
-    margin-top: 18px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    margin: 0;
+    padding: 10px 20px calc(12px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(255,255,255,0.16);
+    background: rgba(0,0,0,0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .sidebar-contact p {
+    margin-bottom: 8px;
+    text-align: center;
   }
   .sidebar-contact .social-links {
-    gap: 18px;
+    justify-content: center;
+    gap: clamp(18px, 7vw, 34px);
   }
   .main-content { margin-left: 0; }
-  .page { padding: 12px 20px 48px; }
+  .page { padding: 12px 20px 128px; }
   .carousel { max-width: 100%; }
   #page-home {
     align-items: flex-start;
