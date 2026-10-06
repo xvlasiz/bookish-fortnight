@@ -84,7 +84,9 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   body::before,
   body::after,
-  .sidebar h1.logo-bounce span {
+  .sidebar h1.logo-bounce span,
+  .right-page.is-turning-forward,
+  .left-page.is-turning-back {
     animation: none;
   }
 }
@@ -729,6 +731,170 @@ nav.sections button.active {
   text-align: center;
 }
 
+/* ── SKETCHBOOK ── */
+#page-sketches {
+  align-items: center;
+}
+
+.sketchbook-wrap {
+  width: min(100%, 900px);
+  text-align: center;
+}
+
+.sketchbook-wrap h2 {
+  margin-bottom: 8px;
+}
+
+.sketchbook-intro,
+.sketchbook-counter,
+.sketchbook-hint {
+  color: rgba(255,255,255,0.72);
+}
+
+.sketchbook-intro {
+  margin: 0 auto 28px;
+}
+
+.sketchbook-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1800px;
+}
+
+.sketchbook {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(100%, 800px);
+  aspect-ratio: 1.45;
+  border-radius: 12px;
+  box-shadow: 0 28px 65px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.14);
+  touch-action: pan-y;
+}
+
+.sketchbook-page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #42403a;
+  background-color: #eee8d9;
+  background-image:
+    radial-gradient(ellipse at 12% 14%, rgba(170,147,108,.12), transparent 42%),
+    radial-gradient(ellipse at 88% 86%, rgba(149,132,101,.1), transparent 46%),
+    repeating-linear-gradient(0deg, rgba(82,72,53,.025) 0, rgba(82,72,53,.025) 1px, transparent 1px, transparent 4px);
+}
+
+.left-page {
+  border-radius: 12px 0 0 12px;
+  box-shadow: inset -18px 0 24px -22px rgba(0,0,0,.55);
+}
+
+.right-page {
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  border-radius: 0 12px 12px 0;
+  box-shadow: inset 18px 0 24px -22px rgba(0,0,0,.55);
+  backface-visibility: hidden;
+}
+
+.right-page.is-turning-forward {
+  animation: sketch-page-forward .58s cubic-bezier(.48,.04,.26,1);
+}
+
+.left-page.is-turning-back {
+  transform-origin: right center;
+  animation: sketch-page-back .58s cubic-bezier(.48,.04,.26,1);
+}
+
+@keyframes sketch-page-forward {
+  0% { transform: rotateY(0); }
+  45% { box-shadow: inset 18px 0 30px rgba(0,0,0,.2); }
+  100% { transform: rotateY(-165deg); }
+}
+
+@keyframes sketch-page-back {
+  0% { transform: rotateY(0); }
+  45% { box-shadow: inset -18px 0 30px rgba(0,0,0,.2); }
+  100% { transform: rotateY(165deg); }
+}
+
+.page-label {
+  position: absolute;
+  top: 20px;
+  color: rgba(66,64,58,.56);
+  font-family: 'Wagon Extra Light', Georgia, serif;
+  font-size: 14px;
+  letter-spacing: .12em;
+}
+
+.left-page .page-label { left: 22px; }
+.right-page .page-label { right: 22px; }
+
+.page-note {
+  color: rgba(66,64,58,.48);
+  font-size: clamp(13px, 1.8vw, 17px);
+  letter-spacing: .04em;
+}
+
+.page-curl {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 16px;
+  background: linear-gradient(90deg, rgba(55,45,30,.12), transparent);
+}
+
+.sketchbook-control {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 50%;
+  background: rgba(0,0,0,.32);
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s, opacity .2s, transform .2s;
+}
+
+.sketchbook-control:hover:not(:disabled) {
+  transform: scale(1.08);
+  background: rgba(255,255,255,.16);
+}
+
+.sketchbook-control:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
+.sketchbook-control svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sketchbook-control.previous { left: -64px; }
+.sketchbook-control.next { right: -64px; }
+
+.sketchbook-counter {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.sketchbook-hint {
+  margin-top: 8px;
+  font-size: 13px;
+  opacity: .65;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) and (pointer: coarse) {
   body::before,
@@ -853,6 +1019,47 @@ nav.sections button.active {
   #page-home {
     align-items: flex-start;
     padding-top: 12px;
+  }
+  #page-sketches {
+    align-items: flex-start;
+  }
+  .sketchbook-wrap {
+    padding-top: 8px;
+  }
+  .sketchbook-wrap h2 {
+    font-size: 36px;
+  }
+  .sketchbook-intro {
+    margin-bottom: 20px;
+  }
+  .sketchbook-stage {
+    padding: 0 28px;
+  }
+  .sketchbook {
+    width: 100%;
+    aspect-ratio: .78;
+    grid-template-columns: 1fr;
+  }
+  .sketchbook .left-page {
+    display: none;
+  }
+  .sketchbook .right-page {
+    border-radius: 10px;
+    box-shadow: inset 0 0 22px rgba(0,0,0,.08);
+  }
+  .sketchbook .right-page.is-turning-back {
+    transform-origin: right center;
+    animation: sketch-page-back .58s cubic-bezier(.48,.04,.26,1);
+  }
+  .sketchbook-control {
+    width: 40px;
+    height: 40px;
+    background: rgba(0,0,0,.58);
+  }
+  .sketchbook-control.previous { left: 0; }
+  .sketchbook-control.next { right: 0; }
+  .sketchbook-counter {
+    margin-top: 14px;
   }
   .arrow { padding: 8px; }
   .arrow svg { width: 28px; height: 28px; }

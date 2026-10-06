@@ -237,8 +237,31 @@
 
     <!-- SKETCHES PAGE -->
     <div class="page" id="page-sketches" style="display:none">
-      <h2>Sketches</h2>
-      <p>Your sketches content goes here.</p>
+      <div class="sketchbook-wrap">
+        <h2>Sketchbook</h2>
+        <p class="sketchbook-intro">A collection of pages in progress.</p>
+        <div class="sketchbook-stage">
+          <button class="sketchbook-control previous" id="sketchbookPrevious" type="button" aria-label="Previous pages" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+          </button>
+          <div class="sketchbook" id="sketchbook" aria-label="Interactive sketchbook. Swipe or use the arrows to turn pages.">
+            <section class="sketchbook-page left-page" aria-label="Sketchbook left page">
+              <span class="page-label" id="sketchLeftNumber">01</span>
+              <span class="page-note">A place for a sketch</span>
+            </section>
+            <section class="sketchbook-page right-page" id="sketchRightPage" aria-label="Sketchbook right page">
+              <span class="page-label" id="sketchRightNumber">02</span>
+              <span class="page-note">Your drawing goes here</span>
+              <span class="page-curl" aria-hidden="true"></span>
+            </section>
+          </div>
+          <button class="sketchbook-control next" id="sketchbookNext" type="button" aria-label="Next pages">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+        </div>
+        <p class="sketchbook-counter" id="sketchbookCounter" aria-live="polite">Pages 1–2 of 12</p>
+        <p class="sketchbook-hint">Use the arrows or swipe the pages to browse</p>
+      </div>
     </div>
 
     <!-- ABOUT PAGE -->
@@ -443,6 +466,67 @@
     sections.classList.toggle('menu-open', !isOpen);
   });
 
+  const sketchbook = document.getElementById('sketchbook');
+  const sketchLeftPage = sketchbook.querySelector('.left-page');
+  const sketchRightPage = document.getElementById('sketchRightPage');
+  const sketchLeftNumber = document.getElementById('sketchLeftNumber');
+  const sketchRightNumber = document.getElementById('sketchRightNumber');
+  const sketchCounter = document.getElementById('sketchbookCounter');
+  const sketchPrevious = document.getElementById('sketchbookPrevious');
+  const sketchNext = document.getElementById('sketchbookNext');
+  const sketchPageCount = 12;
+  let sketchSpread = 0;
+  let sketchTurning = false;
+
+  function updateSketchbook() {
+    const firstPage = sketchSpread * 2 + 1;
+    sketchLeftNumber.textContent = String(firstPage).padStart(2, '0');
+    sketchRightNumber.textContent = String(firstPage + 1).padStart(2, '0');
+    sketchCounter.textContent = `Pages ${firstPage}–${firstPage + 1} of ${sketchPageCount}`;
+    sketchPrevious.disabled = sketchSpread === 0;
+    sketchNext.disabled = firstPage + 1 >= sketchPageCount;
+  }
+
+  function turnSketchPages(direction) {
+    const lastSpread = sketchPageCount / 2 - 1;
+    const nextSpread = sketchSpread + direction;
+    if (sketchTurning || nextSpread < 0 || nextSpread > lastSpread) return;
+
+    sketchTurning = true;
+    const isSinglePage = window.matchMedia('(max-width: 860px) and (pointer: coarse)').matches;
+    const turningPage = direction > 0 || isSinglePage ? sketchRightPage : sketchLeftPage;
+    const turnClass = direction > 0 ? 'is-turning-forward' : 'is-turning-back';
+    turningPage.classList.add(turnClass);
+    const turnDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 600;
+
+    window.setTimeout(() => {
+      sketchSpread = nextSpread;
+      updateSketchbook();
+      turningPage.classList.remove(turnClass);
+      sketchTurning = false;
+    }, turnDuration);
+  }
+
+  sketchPrevious.addEventListener('click', () => turnSketchPages(-1));
+  sketchNext.addEventListener('click', () => turnSketchPages(1));
+
+  let sketchTouchStartX = 0;
+  let sketchTouchStartY = 0;
+  sketchbook.addEventListener('touchstart', (event) => {
+    sketchTouchStartX = event.changedTouches[0].clientX;
+    sketchTouchStartY = event.changedTouches[0].clientY;
+  }, { passive: true });
+
+  sketchbook.addEventListener('touchend', (event) => {
+    const deltaX = event.changedTouches[0].clientX - sketchTouchStartX;
+    const deltaY = event.changedTouches[0].clientY - sketchTouchStartY;
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      turnSketchPages(deltaX < 0 ? 1 : -1);
+    }
+  }, { passive: true });
+
+  updateSketchbook();
+
   let lastScrollY = window.scrollY;
   let scrollUpdatePending = false;
 
@@ -492,6 +576,11 @@
 
   // ── Keyboard arrows ───────────────────────────────────────────────────
   document.addEventListener('keydown', (e) => {
+    if (document.getElementById('page-sketches').style.display !== 'none') {
+      if (e.key === 'ArrowLeft') turnSketchPages(-1);
+      if (e.key === 'ArrowRight') turnSketchPages(1);
+      return;
+    }
     if (e.key === 'ArrowLeft')  goTo(currentIndex - 1);
     if (e.key === 'ArrowRight') goTo(currentIndex + 1);
   });
