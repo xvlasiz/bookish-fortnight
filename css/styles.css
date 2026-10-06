@@ -162,6 +162,11 @@ nav.sections button.active {
   width: fit-content;
 }
 
+nav.sections button[data-section="sketches"],
+#page-sketches {
+  display: none !important;
+}
+
 .menu-toggle {
   display: none;
 }
