@@ -86,7 +86,9 @@ body::after {
   body::after,
   .sidebar h1.logo-bounce span,
   .right-page.is-turning-forward,
-  .left-page.is-turning-back {
+  .left-page.is-turning-back,
+  #page-sketches .sketchbook .left-page.is-turning-forward,
+  #page-sketches .sketchbook .left-page.is-turning-back {
     animation: none;
   }
 }
@@ -1112,33 +1114,45 @@ nav.sections button.active {
     grid-template-columns: 1fr;
   }
   .sketchbook .left-page {
-    display: none;
-  }
-  .sketchbook .right-page {
+    display: flex;
+    grid-column: 1;
+    grid-row: 1;
     border-radius: 10px;
     box-shadow: inset 0 0 22px rgba(0,0,0,.08);
   }
-  .sketchbook .right-page .sketch-art {
+  .sketchbook .left-page .sketch-art {
     left: 0;
-    width: 100%;
+    width: 200%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+  }
+  .sketchbook .right-page {
+    display: none;
   }
   .sketchbook-underlay {
     grid-template-columns: 1fr;
   }
   .sketchbook-underlay .sketchbook-page:first-child {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .sketchbook-underlay .sketchbook-page:first-child .sketch-art {
+    left: 0;
+    width: 200%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .sketchbook-underlay .sketchbook-page:last-child {
     display: none;
   }
-  .sketchbook-underlay .sketchbook-page:last-child .sketch-art {
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-  .sketchbook .right-page.is-turning-back {
+  .sketchbook .left-page.is-turning-forward {
     transform-origin: right center;
     animation: sketch-page-back .6s cubic-bezier(.48,.04,.26,1);
+  }
+  .sketchbook .left-page.is-turning-back {
+    transform-origin: right center;
+    animation: sketch-page-forward .6s cubic-bezier(.48,.04,.26,1);
   }
   .sketchbook-control {
     width: 40px;
@@ -1160,4 +1174,48 @@ nav.sections button.active {
   .arrow.next { right: 2px; }
   .dots { margin-top: 18px; }
   .video-item { padding: 20px; }
+}
+
+@media (max-width: 860px) and (pointer: coarse) and (orientation: landscape) {
+  .sketchbook {
+    width: min(100%, 800px);
+    aspect-ratio: 1.45;
+    grid-template-columns: 1fr 1fr;
+  }
+  .sketchbook .left-page {
+    display: flex;
+    grid-column: auto;
+    grid-row: auto;
+    border-radius: 12px 0 0 12px;
+    box-shadow: inset -18px 0 24px -22px rgba(0,0,0,.55);
+  }
+  .sketchbook .right-page {
+    display: flex;
+    border-radius: 0 12px 12px 0;
+    box-shadow: inset 18px 0 24px -22px rgba(0,0,0,.55);
+  }
+  .sketchbook .right-page .sketch-art {
+    left: -100%;
+    width: 200%;
+    object-fit: cover;
+  }
+  .sketchbook-underlay {
+    grid-template-columns: 1fr 1fr;
+  }
+  .sketchbook-underlay .sketchbook-page:first-child,
+  .sketchbook-underlay .sketchbook-page:last-child {
+    display: flex;
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .sketchbook-underlay .sketchbook-page:first-child .sketch-art {
+    left: 0;
+    width: 200%;
+    object-fit: cover;
+  }
+  .sketchbook-underlay .sketchbook-page:last-child .sketch-art {
+    left: -100%;
+    width: 200%;
+    object-fit: cover;
+  }
 }
