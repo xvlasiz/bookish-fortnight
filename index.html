@@ -236,7 +236,7 @@
 
 
     <!-- SKETCHES PAGE -->
-    <div class="page" id="page-sketches" style="display:none">
+    <div class="page" id="page-sketches">
       <div class="sketchbook-wrap">
         <h2>Sketchbook</h2>
         <p class="sketchbook-intro">A collection of pages in progress.</p>
@@ -245,14 +245,20 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
           </button>
           <div class="sketchbook" id="sketchbook" aria-label="Interactive sketchbook. Swipe or use the arrows to turn pages.">
+            <div class="sketchbook-underlay" aria-hidden="true">
+              <span class="sketchbook-page"><img class="sketch-art left-art" id="sketchUnderlayLeft" alt=""></span>
+              <span class="sketchbook-page"><img class="sketch-art right-art" id="sketchUnderlayRight" alt=""></span>
+            </div>
             <section class="sketchbook-page left-page" aria-label="Sketchbook left page">
               <span class="page-label" id="sketchLeftNumber">01</span>
               <img class="sketch-art left-art" id="sketchLeftImage" alt="" loading="lazy">
+              <span class="page-back" aria-hidden="true"><img class="sketch-art right-art" id="sketchLeftBackImage" alt=""></span>
             </section>
             <section class="sketchbook-page right-page" id="sketchRightPage" aria-label="Sketchbook right page">
               <span class="page-label" id="sketchRightNumber">02</span>
               <img class="sketch-art right-art" id="sketchRightImage" alt="" loading="lazy">
               <span class="page-curl" aria-hidden="true"></span>
+              <span class="page-back" aria-hidden="true"><img class="sketch-art left-art" id="sketchRightBackImage" alt=""></span>
             </section>
           </div>
           <button class="sketchbook-control next" id="sketchbookNext" type="button" aria-label="Next pages">
@@ -471,6 +477,10 @@
   const sketchRightPage = document.getElementById('sketchRightPage');
   const sketchLeftImage = document.getElementById('sketchLeftImage');
   const sketchRightImage = document.getElementById('sketchRightImage');
+  const sketchLeftBackImage = document.getElementById('sketchLeftBackImage');
+  const sketchRightBackImage = document.getElementById('sketchRightBackImage');
+  const sketchUnderlayLeft = document.getElementById('sketchUnderlayLeft');
+  const sketchUnderlayRight = document.getElementById('sketchUnderlayRight');
   const sketchLeftNumber = document.getElementById('sketchLeftNumber');
   const sketchRightNumber = document.getElementById('sketchRightNumber');
   const sketchCounter = document.getElementById('sketchbookCounter');
@@ -490,6 +500,11 @@
     sketchRightNumber.textContent = String(firstPage + 1).padStart(2, '0');
     sketchLeftImage.src = spreadImage;
     sketchRightImage.src = spreadImage;
+    sketchLeftBackImage.src = sketchSpreads[Math.max(0, sketchSpread - 1)];
+    sketchRightBackImage.src = sketchSpreads[Math.min(sketchSpreads.length - 1, sketchSpread + 1)];
+    const underlayImage = sketchSpreads[Math.min(sketchSpreads.length - 1, sketchSpread + 1)];
+    sketchUnderlayLeft.src = underlayImage;
+    sketchUnderlayRight.src = underlayImage;
     sketchLeftImage.alt = `Sketchbook spread ${sketchSpread + 1}, left page`;
     sketchRightImage.alt = `Sketchbook spread ${sketchSpread + 1}, right page`;
     sketchCounter.textContent = `Pages ${firstPage}–${firstPage + 1} of ${sketchPageCount}`;
@@ -503,11 +518,14 @@
     if (sketchTurning || nextSpread < 0 || nextSpread > lastSpread) return;
 
     sketchTurning = true;
+    sketchUnderlayLeft.src = sketchSpreads[nextSpread];
+    sketchUnderlayRight.src = sketchSpreads[nextSpread];
     const isSinglePage = window.matchMedia('(max-width: 860px) and (pointer: coarse)').matches;
+    if (isSinglePage) sketchRightBackImage.src = sketchSpreads[nextSpread];
     const turningPage = direction > 0 || isSinglePage ? sketchRightPage : sketchLeftPage;
     const turnClass = direction > 0 ? 'is-turning-forward' : 'is-turning-back';
     turningPage.classList.add(turnClass);
-    const turnDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 600;
+    const turnDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 740;
 
     window.setTimeout(() => {
       sketchSpread = nextSpread;

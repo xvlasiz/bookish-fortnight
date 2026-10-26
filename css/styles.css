@@ -764,6 +764,7 @@ nav.sections button.active {
 }
 
 .sketchbook {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: min(100%, 800px);
@@ -771,6 +772,15 @@ nav.sections button.active {
   border-radius: 12px;
   box-shadow: 0 28px 65px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.14);
   touch-action: pan-y;
+}
+
+.sketchbook-underlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: inherit;
+  overflow: hidden;
 }
 
 .sketchbook-page {
@@ -787,6 +797,10 @@ nav.sections button.active {
     repeating-linear-gradient(0deg, rgba(82,72,53,.025) 0, rgba(82,72,53,.025) 1px, transparent 1px, transparent 4px);
 }
 
+.sketchbook > .sketchbook-page {
+  z-index: 1;
+}
+
 .sketch-art {
   position: absolute;
   top: 0;
@@ -800,6 +814,7 @@ nav.sections button.active {
 .right-art { left: -100%; }
 
 .left-page {
+  transform-style: preserve-3d;
   border-radius: 12px 0 0 12px;
   box-shadow: inset -18px 0 24px -22px rgba(0,0,0,.55);
 }
@@ -809,28 +824,41 @@ nav.sections button.active {
   transform-style: preserve-3d;
   border-radius: 0 12px 12px 0;
   box-shadow: inset 18px 0 24px -22px rgba(0,0,0,.55);
+}
+
+.page-back {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  background-color: #eee8d9;
+}
+
+.left-page > .left-art,
+.right-page > .right-art {
   backface-visibility: hidden;
 }
 
 .right-page.is-turning-forward {
-  animation: sketch-page-forward .58s cubic-bezier(.48,.04,.26,1);
+  animation: sketch-page-forward .72s cubic-bezier(.22,.61,.36,1);
 }
 
 .left-page.is-turning-back {
   transform-origin: right center;
-  animation: sketch-page-back .58s cubic-bezier(.48,.04,.26,1);
+  animation: sketch-page-back .72s cubic-bezier(.22,.61,.36,1);
 }
 
 @keyframes sketch-page-forward {
   0% { transform: rotateY(0); }
-  45% { box-shadow: inset 18px 0 30px rgba(0,0,0,.2); }
-  100% { transform: rotateY(-165deg); }
+  45% { box-shadow: inset 18px 0 30px rgba(0,0,0,.24); }
+  100% { transform: rotateY(-180deg); }
 }
 
 @keyframes sketch-page-back {
   0% { transform: rotateY(0); }
-  45% { box-shadow: inset -18px 0 30px rgba(0,0,0,.2); }
-  100% { transform: rotateY(165deg); }
+  45% { box-shadow: inset -18px 0 30px rgba(0,0,0,.24); }
+  100% { transform: rotateY(180deg); }
 }
 
 .page-label {
@@ -1065,9 +1093,21 @@ nav.sections button.active {
     height: 100%;
     object-fit: contain;
   }
+  .sketchbook-underlay {
+    grid-template-columns: 1fr;
+  }
+  .sketchbook-underlay .sketchbook-page:first-child {
+    display: none;
+  }
+  .sketchbook-underlay .sketchbook-page:last-child .sketch-art {
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
   .sketchbook .right-page.is-turning-back {
     transform-origin: right center;
-    animation: sketch-page-back .58s cubic-bezier(.48,.04,.26,1);
+    animation: sketch-page-back .72s cubic-bezier(.22,.61,.36,1);
   }
   .sketchbook-control {
     width: 40px;
