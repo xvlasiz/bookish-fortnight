@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Uladzislau Ryzhevich - Portfolio</title>
-  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=sketchbook-clean-turn">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=sketchbook-preloaded-turn">
   <link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
   <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
 
@@ -485,20 +485,42 @@
   const sketchSpreads = Array.from({ length: 16 }, (_, index) =>
     `/sketchbook/pages/sketch-${String(index + 1).padStart(2, '0')}.jpg`
   );
+  const sketchPreloads = new Map();
   const sketchPageCount = sketchSpreads.length * 2;
   let sketchSpread = 0;
   let sketchTurning = false;
+
+  function preloadSketchSpread(index) {
+    const url = sketchSpreads[index];
+    if (!sketchPreloads.has(url)) {
+      const image = new Image();
+      const loaded = new Promise((resolve, reject) => {
+        image.onload = () => {
+          const decoded = image.decode ? image.decode() : Promise.resolve();
+          decoded.then(() => resolve(image), reject);
+        };
+        image.onerror = () => reject(new Error(`Unable to load sketchbook image: ${url}`));
+      });
+      image.src = url;
+      sketchPreloads.set(url, loaded);
+    }
+    return sketchPreloads.get(url);
+  }
+
+  function setSketchImage(image, url) {
+    if (image.getAttribute('src') !== url) image.src = url;
+  }
 
   function updateSketchbook() {
     const firstPage = sketchSpread * 2 + 1;
     const spreadImage = sketchSpreads[sketchSpread];
     sketchLeftNumber.textContent = String(firstPage).padStart(2, '0');
     sketchRightNumber.textContent = String(firstPage + 1).padStart(2, '0');
-    sketchLeftImage.src = spreadImage;
-    sketchRightImage.src = spreadImage;
+    setSketchImage(sketchLeftImage, spreadImage);
+    setSketchImage(sketchRightImage, spreadImage);
     const underlayImage = sketchSpreads[Math.min(sketchSpreads.length - 1, sketchSpread + 1)];
-    sketchUnderlayLeft.src = underlayImage;
-    sketchUnderlayRight.src = underlayImage;
+    setSketchImage(sketchUnderlayLeft, underlayImage);
+    setSketchImage(sketchUnderlayRight, underlayImage);
     sketchLeftImage.alt = `Sketchbook spread ${sketchSpread + 1}, left page`;
     sketchRightImage.alt = `Sketchbook spread ${sketchSpread + 1}, right page`;
     sketchCounter.textContent = `Pages ${firstPage}–${firstPage + 1} of ${sketchPageCount}`;
@@ -512,20 +534,25 @@
     if (sketchTurning || nextSpread < 0 || nextSpread > lastSpread) return;
 
     sketchTurning = true;
-    sketchUnderlayLeft.src = sketchSpreads[nextSpread];
-    sketchUnderlayRight.src = sketchSpreads[nextSpread];
-    const isSinglePage = window.matchMedia('(max-width: 860px) and (pointer: coarse)').matches;
-    const turningPage = direction > 0 || isSinglePage ? sketchRightPage : sketchLeftPage;
-    const turnClass = direction > 0 ? 'is-turning-forward' : 'is-turning-back';
-    turningPage.classList.add(turnClass);
-    const turnDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 600;
+    preloadSketchSpread(nextSpread).then(() => {
+      setSketchImage(sketchUnderlayLeft, sketchSpreads[nextSpread]);
+      setSketchImage(sketchUnderlayRight, sketchSpreads[nextSpread]);
+      const isSinglePage = window.matchMedia('(max-width: 860px) and (pointer: coarse)').matches;
+      const turningPage = direction > 0 || isSinglePage ? sketchRightPage : sketchLeftPage;
+      const turnClass = direction > 0 ? 'is-turning-forward' : 'is-turning-back';
+      const turnDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 600;
+      turningPage.classList.add(turnClass);
 
-    window.setTimeout(() => {
-      sketchSpread = nextSpread;
-      updateSketchbook();
-      turningPage.classList.remove(turnClass);
+      window.setTimeout(() => {
+        sketchSpread = nextSpread;
+        updateSketchbook();
+        turningPage.classList.remove(turnClass);
+        sketchTurning = false;
+      }, turnDuration);
+    }).catch((error) => {
+      console.error(error);
       sketchTurning = false;
-    }, turnDuration);
+    });
   }
 
   sketchPrevious.addEventListener('click', () => turnSketchPages(-1));

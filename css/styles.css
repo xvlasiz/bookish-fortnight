@@ -827,12 +827,12 @@ nav.sections button.active {
 }
 
 .right-page.is-turning-forward {
-  animation: sketch-page-forward .58s cubic-bezier(.48,.04,.26,1);
+  animation: sketch-page-forward .6s cubic-bezier(.48,.04,.26,1);
 }
 
 .left-page.is-turning-back {
   transform-origin: right center;
-  animation: sketch-page-back .58s cubic-bezier(.48,.04,.26,1);
+  animation: sketch-page-back .6s cubic-bezier(.48,.04,.26,1);
 }
 
 @keyframes sketch-page-forward {
@@ -1093,7 +1093,7 @@ nav.sections button.active {
   }
   .sketchbook .right-page.is-turning-back {
     transform-origin: right center;
-    animation: sketch-page-back .58s cubic-bezier(.48,.04,.26,1);
+    animation: sketch-page-back .6s cubic-bezier(.48,.04,.26,1);
   }
   .sketchbook-control {
     width: 40px;
