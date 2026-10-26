@@ -826,6 +826,10 @@ nav.sections button.active {
   backface-visibility: hidden;
 }
 
+.sketchbook-page.is-revealing-next {
+  animation: sketch-page-reveal .6s ease-in-out forwards;
+}
+
 .right-page.is-turning-forward {
   animation: sketch-page-forward .6s cubic-bezier(.48,.04,.26,1);
 }
@@ -845,6 +849,10 @@ nav.sections button.active {
   0% { transform: rotateY(0); }
   45% { box-shadow: inset -18px 0 30px rgba(0,0,0,.2); }
   100% { transform: rotateY(165deg); }
+}
+
+@keyframes sketch-page-reveal {
+  to { opacity: 0; }
 }
 
 .page-label {

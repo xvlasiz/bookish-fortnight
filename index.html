@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Uladzislau Ryzhevich - Portfolio</title>
-  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=sketchbook-preloaded-turn">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=sketchbook-full-turn">
   <link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
   <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
 
@@ -518,7 +518,7 @@
     sketchRightNumber.textContent = String(firstPage + 1).padStart(2, '0');
     setSketchImage(sketchLeftImage, spreadImage);
     setSketchImage(sketchRightImage, spreadImage);
-    const underlayImage = sketchSpreads[Math.min(sketchSpreads.length - 1, sketchSpread + 1)];
+    const underlayImage = sketchSpreads[sketchSpread];
     setSketchImage(sketchUnderlayLeft, underlayImage);
     setSketchImage(sketchUnderlayRight, underlayImage);
     sketchLeftImage.alt = `Sketchbook spread ${sketchSpread + 1}, left page`;
@@ -539,14 +539,17 @@
       setSketchImage(sketchUnderlayRight, sketchSpreads[nextSpread]);
       const isSinglePage = window.matchMedia('(max-width: 860px) and (pointer: coarse)').matches;
       const turningPage = direction > 0 || isSinglePage ? sketchRightPage : sketchLeftPage;
+      const revealingPage = direction > 0 || isSinglePage ? sketchLeftPage : sketchRightPage;
       const turnClass = direction > 0 ? 'is-turning-forward' : 'is-turning-back';
       const turnDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 600;
       turningPage.classList.add(turnClass);
+      revealingPage.classList.add('is-revealing-next');
 
       window.setTimeout(() => {
         sketchSpread = nextSpread;
         updateSketchbook();
         turningPage.classList.remove(turnClass);
+        revealingPage.classList.remove('is-revealing-next');
         sketchTurning = false;
       }, turnDuration);
     }).catch((error) => {
