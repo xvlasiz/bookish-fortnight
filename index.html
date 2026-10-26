@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Uladzislau Ryzhevich - Portfolio</title>
-  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=sketchbook-first-page">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=sketchbook-first-page-icon">
   <link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
   <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
 
@@ -264,7 +264,9 @@
           </button>
         </div>
         <p class="sketchbook-counter" id="sketchbookCounter" aria-live="polite">Pages 1–2 of 32</p>
-        <button class="sketchbook-first-page" id="sketchbookFirstPage" type="button" aria-label="Go to the first sketchbook page" disabled>First page</button>
+        <button class="sketchbook-first-page" id="sketchbookFirstPage" type="button" aria-label="Go to the first sketchbook page" title="Go to the first page" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 18-6-6 6-6M19 18l-6-6 6-6"></path></svg>
+        </button>
         <p class="sketchbook-hint">Use the arrows or swipe the pages to browse</p>
       </div>
     </div>
@@ -530,7 +532,7 @@
     sketchCounter.textContent = `Pages ${firstPage}–${firstPage + 1} of ${sketchPageCount}`;
     sketchPrevious.disabled = sketchSpread === 0;
     sketchNext.disabled = sketchSpread >= sketchSpreads.length - 1;
-    sketchFirstPage.disabled = sketchSpread === 0;
+    sketchFirstPage.hidden = sketchSpread === 0;
   }
 
   function turnSketchPages(direction) {

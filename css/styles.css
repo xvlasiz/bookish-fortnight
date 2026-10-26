@@ -924,25 +924,37 @@ nav.sections button.active {
 }
 
 .sketchbook-first-page {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
   margin-top: 10px;
-  padding: 7px 14px;
-  border: 1px solid rgba(255,255,255,.32);
-  border-radius: 999px;
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.86);
-  font: inherit;
-  font-size: 13px;
+  padding: 7px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 50%;
+  background: rgba(0,0,0,.32);
+  color: #fff;
   cursor: pointer;
-  transition: background .2s, opacity .2s;
+  transition: background .2s, transform .2s;
 }
 
-.sketchbook-first-page:hover:not(:disabled) {
+.sketchbook-first-page[hidden] {
+  display: none;
+}
+
+.sketchbook-first-page:hover {
+  transform: scale(1.08);
   background: rgba(255,255,255,.16);
 }
 
-.sketchbook-first-page:disabled {
-  opacity: .35;
-  cursor: default;
+.sketchbook-first-page svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .sketchbook-hint {
