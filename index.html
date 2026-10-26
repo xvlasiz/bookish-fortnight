@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Uladzislau Ryzhevich - Portfolio</title>
-  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=sketchbook-full-turn">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=sketchbook-first-page">
   <link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
   <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
 
@@ -264,6 +264,7 @@
           </button>
         </div>
         <p class="sketchbook-counter" id="sketchbookCounter" aria-live="polite">Pages 1–2 of 32</p>
+        <button class="sketchbook-first-page" id="sketchbookFirstPage" type="button" aria-label="Go to the first sketchbook page" disabled>First page</button>
         <p class="sketchbook-hint">Use the arrows or swipe the pages to browse</p>
       </div>
     </div>
@@ -482,6 +483,7 @@
   const sketchCounter = document.getElementById('sketchbookCounter');
   const sketchPrevious = document.getElementById('sketchbookPrevious');
   const sketchNext = document.getElementById('sketchbookNext');
+  const sketchFirstPage = document.getElementById('sketchbookFirstPage');
   const sketchSpreads = Array.from({ length: 16 }, (_, index) =>
     `/sketchbook/pages/sketch-${String(index + 1).padStart(2, '0')}.jpg`
   );
@@ -489,6 +491,8 @@
   const sketchPageCount = sketchSpreads.length * 2;
   let sketchSpread = 0;
   let sketchTurning = false;
+  let sketchTurnRequest = 0;
+  let sketchTurnTimer;
 
   function preloadSketchSpread(index) {
     const url = sketchSpreads[index];
@@ -526,6 +530,7 @@
     sketchCounter.textContent = `Pages ${firstPage}–${firstPage + 1} of ${sketchPageCount}`;
     sketchPrevious.disabled = sketchSpread === 0;
     sketchNext.disabled = sketchSpread >= sketchSpreads.length - 1;
+    sketchFirstPage.disabled = sketchSpread === 0;
   }
 
   function turnSketchPages(direction) {
@@ -534,7 +539,9 @@
     if (sketchTurning || nextSpread < 0 || nextSpread > lastSpread) return;
 
     sketchTurning = true;
+    const turnRequest = ++sketchTurnRequest;
     preloadSketchSpread(nextSpread).then(() => {
+      if (turnRequest !== sketchTurnRequest) return;
       setSketchImage(sketchUnderlayLeft, sketchSpreads[nextSpread]);
       setSketchImage(sketchUnderlayRight, sketchSpreads[nextSpread]);
       const isSinglePage = window.matchMedia('(max-width: 860px) and (pointer: coarse)').matches;
@@ -545,7 +552,7 @@
       turningPage.classList.add(turnClass);
       revealingPage.classList.add('is-revealing-next');
 
-      window.setTimeout(() => {
+      sketchTurnTimer = window.setTimeout(() => {
         sketchSpread = nextSpread;
         updateSketchbook();
         turningPage.classList.remove(turnClass);
@@ -553,10 +560,21 @@
         sketchTurning = false;
       }, turnDuration);
     }).catch((error) => {
+      if (turnRequest !== sketchTurnRequest) return;
       console.error(error);
       sketchTurning = false;
     });
   }
+
+  sketchFirstPage.addEventListener('click', () => {
+    sketchTurnRequest += 1;
+    window.clearTimeout(sketchTurnTimer);
+    sketchLeftPage.classList.remove('is-turning-back', 'is-revealing-next');
+    sketchRightPage.classList.remove('is-turning-forward', 'is-turning-back', 'is-revealing-next');
+    sketchSpread = 0;
+    sketchTurning = false;
+    updateSketchbook();
+  });
 
   sketchPrevious.addEventListener('click', () => turnSketchPages(-1));
   sketchNext.addEventListener('click', () => turnSketchPages(1));
