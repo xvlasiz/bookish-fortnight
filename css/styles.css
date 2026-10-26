@@ -924,11 +924,14 @@ nav.sections button.active {
 }
 
 .sketchbook-first-page {
+  position: absolute;
+  z-index: 3;
+  top: calc(50% + 32px);
+  left: -64px;
   display: inline-grid;
   place-items: center;
   width: 38px;
   height: 38px;
-  margin-top: 10px;
   padding: 7px;
   border: 1px solid rgba(255,255,255,.35);
   border-radius: 50%;
@@ -1144,6 +1147,10 @@ nav.sections button.active {
   }
   .sketchbook-control.previous { left: 0; }
   .sketchbook-control.next { right: 0; }
+  .sketchbook-first-page {
+    top: calc(50% + 28px);
+    left: 0;
+  }
   .sketchbook-counter {
     margin-top: 14px;
   }
