@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Uladzislau Ryzhevich - Portfolio</title>
-  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=sketchbook-art">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css?v=sketchbook-clean-turn">
   <link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
   <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
 
@@ -252,13 +252,11 @@
             <section class="sketchbook-page left-page" aria-label="Sketchbook left page">
               <span class="page-label" id="sketchLeftNumber">01</span>
               <img class="sketch-art left-art" id="sketchLeftImage" alt="" loading="lazy">
-              <span class="page-back" aria-hidden="true"><img class="sketch-art right-art" id="sketchLeftBackImage" alt=""></span>
             </section>
             <section class="sketchbook-page right-page" id="sketchRightPage" aria-label="Sketchbook right page">
               <span class="page-label" id="sketchRightNumber">02</span>
               <img class="sketch-art right-art" id="sketchRightImage" alt="" loading="lazy">
               <span class="page-curl" aria-hidden="true"></span>
-              <span class="page-back" aria-hidden="true"><img class="sketch-art left-art" id="sketchRightBackImage" alt=""></span>
             </section>
           </div>
           <button class="sketchbook-control next" id="sketchbookNext" type="button" aria-label="Next pages">
@@ -477,8 +475,6 @@
   const sketchRightPage = document.getElementById('sketchRightPage');
   const sketchLeftImage = document.getElementById('sketchLeftImage');
   const sketchRightImage = document.getElementById('sketchRightImage');
-  const sketchLeftBackImage = document.getElementById('sketchLeftBackImage');
-  const sketchRightBackImage = document.getElementById('sketchRightBackImage');
   const sketchUnderlayLeft = document.getElementById('sketchUnderlayLeft');
   const sketchUnderlayRight = document.getElementById('sketchUnderlayRight');
   const sketchLeftNumber = document.getElementById('sketchLeftNumber');
@@ -500,8 +496,6 @@
     sketchRightNumber.textContent = String(firstPage + 1).padStart(2, '0');
     sketchLeftImage.src = spreadImage;
     sketchRightImage.src = spreadImage;
-    sketchLeftBackImage.src = sketchSpreads[Math.max(0, sketchSpread - 1)];
-    sketchRightBackImage.src = sketchSpreads[Math.min(sketchSpreads.length - 1, sketchSpread + 1)];
     const underlayImage = sketchSpreads[Math.min(sketchSpreads.length - 1, sketchSpread + 1)];
     sketchUnderlayLeft.src = underlayImage;
     sketchUnderlayRight.src = underlayImage;
@@ -521,11 +515,10 @@
     sketchUnderlayLeft.src = sketchSpreads[nextSpread];
     sketchUnderlayRight.src = sketchSpreads[nextSpread];
     const isSinglePage = window.matchMedia('(max-width: 860px) and (pointer: coarse)').matches;
-    if (isSinglePage) sketchRightBackImage.src = sketchSpreads[nextSpread];
     const turningPage = direction > 0 || isSinglePage ? sketchRightPage : sketchLeftPage;
     const turnClass = direction > 0 ? 'is-turning-forward' : 'is-turning-back';
     turningPage.classList.add(turnClass);
-    const turnDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 740;
+    const turnDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 600;
 
     window.setTimeout(() => {
       sketchSpread = nextSpread;
