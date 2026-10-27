@@ -923,6 +923,9 @@ nav.sections button.active {
 .sketchbook-counter {
   display: block;
   width: 100%;
+  max-width: 800px;
+  margin-right: auto;
+  margin-left: auto;
   margin-top: 20px;
   font-size: 14px;
   text-align: center;
@@ -966,6 +969,10 @@ nav.sections button.active {
 }
 
 .sketchbook-hint {
+  width: 100%;
+  max-width: 800px;
+  margin-right: auto;
+  margin-left: auto;
   margin-top: 8px;
   font-size: 13px;
   opacity: .65;
