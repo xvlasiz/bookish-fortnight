@@ -739,7 +739,7 @@ nav.sections button.active {
 }
 
 .sketchbook-wrap {
-  width: min(100%, 900px);
+  width: min(100%, 1100px);
   text-align: center;
 }
 
@@ -769,7 +769,7 @@ nav.sections button.active {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: min(100%, 800px);
+  width: min(100%, 1000px);
   aspect-ratio: 1.45;
   border-radius: 12px;
   box-shadow: 0 28px 65px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.14);
@@ -923,7 +923,7 @@ nav.sections button.active {
 .sketchbook-counter {
   display: block;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 20px;
@@ -970,7 +970,7 @@ nav.sections button.active {
 
 .sketchbook-hint {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 8px;
@@ -1185,6 +1185,15 @@ nav.sections button.active {
   .arrow.next { right: 2px; }
   .dots { margin-top: 18px; }
   .video-item { padding: 20px; }
+}
+
+@media (min-width: 861px) {
+  .sketchbook-wrap {
+    width: min(100%, 1120px);
+  }
+  .sketchbook {
+    width: min(100%, 1040px);
+  }
 }
 
 @media (max-width: 860px) and (pointer: coarse) and (orientation: landscape) {
