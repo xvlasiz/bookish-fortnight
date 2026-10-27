@@ -921,8 +921,11 @@ nav.sections button.active {
 .sketchbook-control.next { right: -64px; }
 
 .sketchbook-counter {
+  display: block;
+  width: 100%;
   margin-top: 20px;
   font-size: 14px;
+  text-align: center;
 }
 
 .sketchbook-first-page {
@@ -966,6 +969,7 @@ nav.sections button.active {
   margin-top: 8px;
   font-size: 13px;
   opacity: .65;
+  text-align: center;
 }
 
 /* ── RESPONSIVE ── */
