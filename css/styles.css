@@ -359,7 +359,7 @@ nav.sections button.active {
 
 .about-skills {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 32px;
   width: 100%;
   margin: 36px auto 0;
@@ -747,14 +747,9 @@ nav.sections button.active {
   margin-bottom: 8px;
 }
 
-.sketchbook-intro,
 .sketchbook-counter,
 .sketchbook-hint {
   color: rgba(255,255,255,0.72);
-}
-
-.sketchbook-intro {
-  margin: 0 auto 28px;
 }
 
 .sketchbook-stage {
@@ -1112,9 +1107,6 @@ nav.sections button.active {
   }
   .sketchbook-wrap h2 {
     font-size: 36px;
-  }
-  .sketchbook-intro {
-    margin-bottom: 20px;
   }
   .sketchbook-stage {
     padding: 0 28px;
