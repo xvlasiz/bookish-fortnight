@@ -288,6 +288,31 @@ nav.sections button.active {
   object-fit: cover;
 }
 
+.about-heading {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.about-heading h2 {
+  margin-bottom: 24px;
+}
+
+.about-heading-arrow {
+  position: absolute;
+  top: -22px;
+  right: -66px;
+  width: 58px;
+  height: 58px;
+  overflow: visible;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: rotate(4deg);
+}
+
 .about-content p {
   margin: 0 auto;
 }
@@ -363,7 +388,7 @@ nav.sections button.active {
   gap: 32px;
   width: 100%;
   margin: 36px auto 0;
-  text-align: left;
+  text-align: center;
 }
 
 .about-skills h3 {
@@ -381,6 +406,7 @@ nav.sections button.active {
   font-size: 16px;
   line-height: 1.5;
   list-style: none;
+  text-align: center;
 }
 
 .social-links {
