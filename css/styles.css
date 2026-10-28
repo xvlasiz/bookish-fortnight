@@ -400,13 +400,16 @@ nav.sections button.active {
 
 .about-skills ul {
   display: grid;
-  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 8px;
   padding: 0;
   color: rgba(255,255,255,0.82);
   font-size: 16px;
   line-height: 1.5;
-  list-style: none;
-  text-align: center;
+  list-style: disc;
+  text-align: left;
+  padding-left: 1.25em;
 }
 
 .social-links {
