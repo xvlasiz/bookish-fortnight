@@ -403,7 +403,11 @@ nav.sections button.active {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 24px;
   row-gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 0;
+  padding-left: 1.25em;
   color: rgba(255,255,255,0.82);
   font-size: 16px;
   line-height: 1.5;
